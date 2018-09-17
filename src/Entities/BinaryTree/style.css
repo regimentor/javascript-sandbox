@@ -1,0 +1,21 @@
+.node {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.node-data {
+  text-align: center;
+  padding: 10px;
+}
+.node-childs {
+  display: flex;
+  flex-direction: row;
+}
+
+.empty-child {
+  content: " ";
+  padding: 10px;
+}

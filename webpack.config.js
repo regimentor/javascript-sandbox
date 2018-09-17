@@ -31,13 +31,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: [/node_modules/],
-        include: [`${__dirname}/client`],
+        include: [`${__dirname}/src`],
         use: [
           {
-            loader: "babel-loader",
-            query: {
-              presets: ["stage-0"]
-            }
+            loader: "babel-loader"
           }
         ]
       },
