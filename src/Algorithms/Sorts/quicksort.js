@@ -1,9 +1,21 @@
+/**
+ * Swap elements n array
+ * @param {Array} arr
+ * @param {Number} left
+ * @param {Number} right
+ */
 const swap = (arr, left, right) => {
   const temp = arr[left];
   arr[left] = arr[right];
   arr[right] = temp;
 };
 
+/**
+ * Transfer elements
+ * @param {Array} arr
+ * @param {Number} left
+ * @param {Number} right
+ */
 const part = (arr, left, right) => {
   const center = Math.floor((left + right) / 2);
   const tempItem = arr[center];

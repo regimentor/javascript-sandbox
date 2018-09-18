@@ -1,21 +1,14 @@
 .node {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  margin: 5px;
 }
 
 .node-data {
-  text-align: center;
-  padding: 10px;
+  font-size: 8px;
+  border: 1px solid #cccccc;
+  max-width: 100px;
 }
-.node-childs {
-  display: flex;
-  flex-direction: row;
+.node-childs li:first-child {
+  border-left: 1px solid #120707;
 }
 
 .empty-child {
-  content: " ";
-  padding: 10px;
 }

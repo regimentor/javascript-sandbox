@@ -1,4 +1,4 @@
-import style from "./style.css";
+import style from './style.css';
 
 class BinaryTreeNode {
   /**
@@ -11,20 +11,21 @@ class BinaryTreeNode {
   parrent = null;
   leftNode = null;
   rightNode = null;
+  count = 0;
   constructor(data, parrent, root) {
     this.data = typeof data === undefined ? null : data;
     this.parrent = parrent;
     this.root = root || false;
 
-    this.DOMNode = document.createElement("div");
-    this.DOMNode.classList.add(style["node"]);
+    this.DOMNode = document.createElement('li');
+    this.DOMNode.classList.add(style['node']);
 
-    const dataView = document.createElement("div");
-    dataView.classList.add(style["node-data"]);
+    const dataView = document.createElement('div');
+    dataView.classList.add(style['node-data']);
     dataView.textContent = this.data;
 
-    this.childsNode = document.createElement("div");
-    this.childsNode.classList.add(style["node-childs"]);
+    this.childsNode = document.createElement('ul');
+    this.childsNode.classList.add(style['node-childs']);
 
     this.DOMNode.appendChild(dataView);
     this.DOMNode.appendChild(this.childsNode);
@@ -48,6 +49,7 @@ export default class BinaryTree {
    * @param {Number} value
    */
   static search(node, value) {
+    debugger;
     if (node.data === value) return node;
     else {
       if (value < node.data) return this.search(node.leftNode, value);
@@ -59,20 +61,21 @@ export default class BinaryTree {
    * @param {BinaryTreeNode} node
    * @param {Number} dataToInsert
    */
-  static add(node, dataToInsert) {
+  static add(node, dataToInsert, compareFunc) {
     if (node.root === true && node.data === null) {
       node.data = dataToInsert;
       return;
     } else {
-      if (node.data > dataToInsert) {
-        if (node.leftNode) this.add(node.leftNode, dataToInsert);
+      if (compareFunc(node.data, dataToInsert) === 0) node.count += 1;
+      if (compareFunc(node.data, dataToInsert) < 0) {
+        if (node.leftNode) this.add(node.leftNode, dataToInsert, compareFunc);
         else {
           node.leftNode = new BinaryTreeNode(dataToInsert, node);
           return;
         }
       }
-      if (node.data < dataToInsert) {
-        if (node.rightNode) this.add(node.rightNode, dataToInsert);
+      if (compareFunc(node.data, dataToInsert) > 0) {
+        if (node.rightNode) this.add(node.rightNode, dataToInsert, compareFunc);
         else {
           node.rightNode = new BinaryTreeNode(dataToInsert, node);
           return;
@@ -95,18 +98,10 @@ export default class BinaryTree {
   render(node) {
     if (node.leftNode) {
       node.childsNode.appendChild(this.render(node.leftNode));
-    } else {
-      const emptyNode = document.createElement("div");
-      emptyNode.classList.add(style["empty-child"]);
-      node.childsNode.appendChild(emptyNode);
     }
 
     if (node.rightNode) {
       node.childsNode.appendChild(this.render(node.rightNode));
-    } else {
-      const emptyNode = document.createElement("div");
-      emptyNode.classList.add(style["empty-child"]);
-      node.childsNode.appendChild(emptyNode);
     }
 
     return node.DOMNode;
